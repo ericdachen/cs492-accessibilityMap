@@ -11,17 +11,17 @@ import (
 
 func ConnectToMongoDB() error {
 	// Set client options
-	clientOptions := options.Client().ApplyURI("mongodb://mongo:27017/accessibilitymap?authSource=admin")
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/accessibilitymap?authSource=admin")
 
 	// Connect to MongoDB
-	MongoClient, err := mongo.Connect(context.TODO(), clientOptions)
-
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	MongoClient = client
 	if err != nil {
 		return err
 	}
 
 	// Check the connection
-	err = MongoClient.Ping(context.TODO(), nil)
+	err = client.Ping(context.TODO(), nil)
 
 	if err != nil {
 		return err
