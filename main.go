@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Starting server...")
 	var err error
 	err = db.ConnectToMongoDB()
 	if err != nil {
@@ -26,6 +27,8 @@ func main() {
 	fmt.Println("Server is running on port 8080")
 
 	engine.GET("/pins/:id", pincontroller.GetPin)
+	engine.POST("/pins", pincontroller.AddPin)
+	engine.GET("/pins/location", pincontroller.GetPinByLocation)
 
 	engine.Run()
 }

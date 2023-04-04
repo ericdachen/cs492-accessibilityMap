@@ -1,8 +1,8 @@
 package types
 
 type IGeoCode struct {
-	Latitude  float64 `json:"latitude" bson:"latitude"`
-	Longitude float64 `json:"longitude" bson:"longitude"`
+	Latitude  float64 `json:"latitude" bson:"latitude" binding:"required"`
+	Longitude float64 `json:"longitude" bson:"longitude" binding:"required"`
 }
 
 // IGeoCode builder pattern code
