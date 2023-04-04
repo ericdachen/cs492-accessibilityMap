@@ -29,6 +29,8 @@ func main() {
 	engine.GET("/pins/:id", pincontroller.GetPin)
 	engine.POST("/pins", pincontroller.AddPin)
 	engine.GET("/pins/location", pincontroller.GetPinByLocation)
+	engine.DELETE("/pins/:id", pincontroller.DeletePin)
+	engine.PUT("/pins/:id", pincontroller.UpdatePin)
 
 	engine.Run()
 }
