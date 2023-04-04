@@ -78,3 +78,39 @@ func GetPinByLocation(context *gin.Context) {
 	response := IGetPinByLocationResponse{pins}
 	context.JSON(http.StatusOK, response)
 }
+
+func DeletePin(context *gin.Context) {
+	var pinId = context.Param("id")
+
+	err := pinservice.DeletePin(pinId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{})
+}
+
+type IUpdatePinResponse struct {
+	NewPin types.IPin `json:"pin"`
+}
+
+func UpdatePin(context *gin.Context) {
+	var pinId = context.Param("id")
+
+	var request IUpdatePinResponse
+	err := context.BindJSON(&request)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	pin, err := pinservice.UpdatePin(pinId, request.NewPin)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	response := IUpdatePinResponse{*pin}
+	context.JSON(http.StatusOK, response)
+}

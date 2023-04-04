@@ -1,7 +1,7 @@
 package types
 
 type IPin struct {
-	Id      string   `json:"id" bson:"id,omitempty"`
+	Id      string   `json:"id" bson:"_id,omitempty"`
 	GeoCode IGeoCode `json:"geocode" bson:"geoCode" binding:"required"`
 }
 
