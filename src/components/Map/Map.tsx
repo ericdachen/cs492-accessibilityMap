@@ -19,7 +19,7 @@ const center = {
 function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBmW9pieLwbY-Xm1BNuJm2NOpnoeHdJSfQ",
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
   });
 
   //Save map in ref if to access the map later
