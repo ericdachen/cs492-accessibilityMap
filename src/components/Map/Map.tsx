@@ -5,10 +5,11 @@ import {
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
+import { Box } from "@mui/material";
 
 const containerStyle = {
-  width: "400px",
-  height: "400px",
+  width: "100%",
+  height: "100%",
 };
 
 const center = {
@@ -49,7 +50,7 @@ function Map() {
 
   if (!isLoaded) return <div>Loading ...</div>;
   return (
-    <>
+    <Box height="80vh" width="55vw">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -57,7 +58,7 @@ function Map() {
         onLoad={onLoad}
         onUnmount={onUnmount}
       ></GoogleMap>
-    </>
+    </Box>
   );
 }
 
