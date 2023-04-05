@@ -1,0 +1,22 @@
+# Config for air
+[build]
+cmd = "go build -gcflags='all=-N -l' -o ./tmp/main"
+bin = "tmp/main"
+tmp_dir = "tmp"
+
+[watch]
+root = "."
+exclude_ext = ["db", "log"]
+exclude_dir = ["assets", "tmp", "vendor"]
+
+[log]
+level = "info"
+
+[on_error]
+# empty
+
+[on_success]
+# empty
+
+[trigger]
+# empty
