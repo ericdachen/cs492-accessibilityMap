@@ -7,13 +7,25 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Box,
 } from "@mui/material";
 
 export default function CheckboxCustom(props: any) {
-  return (
-    <FormControlLabel
-      control={<Checkbox defaultChecked />}
-      label={props.label}
-    />
-  );
+  if (props.size === "small") {
+    return (
+      <FormControlLabel
+        disabled={true}
+        control={<Checkbox defaultChecked />}
+        label={<Typography variant="caption">{props.label}</Typography>}
+      />
+    );
+  } else {
+    return (
+      <FormControlLabel
+        disabled={true}
+        control={<Checkbox defaultChecked />}
+        label={<Typography variant="body2">{props.label}</Typography>}
+      />
+    );
+  }
 }
