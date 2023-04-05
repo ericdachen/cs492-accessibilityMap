@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import background from "./background.png";
+import background from "./map.png";
 import {
   Grid,
   Typography,
@@ -31,10 +31,10 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <Stack spacing={4}>
             <Typography variant="h2" component="h2" align="left">
-              Visit places that care about inclusion!
+              Visit restaurants that care about inclusion!
             </Typography>
             <Typography variant="h5" align="left">
               Preferences
@@ -43,9 +43,12 @@ export default function Home() {
               <Stack>
                 <CheckboxCustom label="Wheelchair Accessible" />
                 <CheckboxCustom label="Sign Language" />
+                <CheckboxCustom label="Service Pet Friendly" />
               </Stack>
               <Stack>
                 <CheckboxCustom label="Multilingual Staff" />
+                <CheckboxCustom label="Braille Menus Printed" />
+                <CheckboxCustom label="Food-Cutting Services" />
               </Stack>
             </Stack>
             <TextField
@@ -56,7 +59,7 @@ export default function Home() {
             />
           </Stack>
         </Grid>
-        <Grid item xs={7}></Grid>
+        <Grid item xs={6}></Grid>
       </Grid>
     </div>
   );
