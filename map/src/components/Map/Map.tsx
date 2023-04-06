@@ -50,7 +50,7 @@ function Map() {
 
   if (!isLoaded) return <div>Loading ...</div>;
   return (
-    <Box height="80vh" width="55vw">
+    <Box height="85vh" width="55vw" marginLeft="2vw">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}

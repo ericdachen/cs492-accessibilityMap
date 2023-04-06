@@ -29,59 +29,60 @@ export default function Explore() {
   theme = responsiveFontSizes(theme);
   return (
     <ThemeProvider theme={theme}>
-      <SearchAppBar />
-
-      <Grid
-        container
-        spacing={0}
-        sx={{
-          px: 5,
-        }}
-        style={{
-          height: "100vh",
-          width: "100vw",
-          alignItems: "center",
-        }}
-      >
-        <Grid item xs={5} spacing={1}>
-          <Stack spacing={1}>
-            <Typography align="left" variant="h3">
-              {" "}
-              Restaurants Near Me
-            </Typography>
-            <Stack direction="row" spacing={1}>
-              <Chip
-                style={{
-                  width: "10vw",
-                }}
-                icon={<AccessibleIcon />}
-                label="Wheelchair Accessible"
-              />
-              <Chip
-                style={{
-                  width: "10vw",
-                }}
-                icon={<AccessibleIcon />}
-                label="Wheelchair Accessible"
-              />
-            </Stack>
-
-            <Box maxHeight="80vh" sx={{ overflow: "auto" }}>
-              <Stack spacing={4} padding={1}>
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
+      <Stack spacing={3}>
+        <SearchAppBar />
+        <Grid
+          container
+          spacing={0}
+          sx={{
+            px: 5,
+          }}
+          style={{
+            height: "100vh",
+            width: "100vw",
+            alignItems: "center",
+          }}
+        >
+          <Grid item xs={5} spacing={1}>
+            <Stack spacing={1}>
+              <Typography align="left" variant="h3">
+                {" "}
+                Restaurants Near Me
+              </Typography>
+              <Stack direction="row" spacing={1}>
+                <Chip
+                  style={{
+                    width: "10vw",
+                  }}
+                  icon={<AccessibleIcon />}
+                  label="Wheelchair Accessible"
+                />
+                <Chip
+                  style={{
+                    width: "10vw",
+                  }}
+                  icon={<AccessibleIcon />}
+                  label="Wheelchair Accessible"
+                />
               </Stack>
-            </Box>
-          </Stack>
+
+              <Box maxHeight="70vh" sx={{ overflow: "auto" }}>
+                <Stack spacing={4} padding={1}>
+                  <RestaurantCard />
+                  <RestaurantCard />
+                  <RestaurantCard />
+                  <RestaurantCard />
+                  <RestaurantCard />
+                  <RestaurantCard />
+                </Stack>
+              </Box>
+            </Stack>
+          </Grid>
+          <Grid item xs={7}>
+            <Map />
+          </Grid>
         </Grid>
-        <Grid item xs={7}>
-          <Map />
-        </Grid>
-      </Grid>
+      </Stack>
     </ThemeProvider>
   );
 }

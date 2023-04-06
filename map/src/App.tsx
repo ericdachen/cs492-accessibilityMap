@@ -7,7 +7,7 @@ import Explore from "./components/Explorer/Explore";
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Explore />
     </div>
   );
 }
