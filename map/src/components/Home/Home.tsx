@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import background from "./map.png";
 import {
   Grid,
@@ -7,9 +7,18 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Box,
   TextField,
 } from "@mui/material";
 import CheckboxCustom from "./Checkbox/CheckboxCustom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import { Height } from "@mui/icons-material";
 
 export default function Home() {
   return (
@@ -51,12 +60,38 @@ export default function Home() {
                 <CheckboxCustom label="Food-Cutting Services" />
               </Stack>
             </Stack>
-            <TextField
-              id="outlined-basic"
-              label="Search"
-              variant="outlined"
-              fullWidth
-            />
+            <Stack direction="row">
+              <TextField
+                id="outlined-basic"
+                label="Search"
+                variant="outlined"
+                fullWidth
+              />
+              <Link
+                to="explore"
+                style={{
+                  height: "inherit",
+                }}
+              >
+                <Box
+                  sx={{
+                    backgroundColor: "#000000",
+                    color: "#FFFFFF",
+                    minHeight: "6.5vh",
+                    px: "0.5vw",
+                    aspectRatio: "1/1",
+                    borderRadius: "0px 10px 10px 0px",
+                    verticalAlign: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <SearchIcon fontSize="large" />
+                </Box>
+              </Link>
+            </Stack>
           </Stack>
         </Grid>
         <Grid item xs={6}></Grid>

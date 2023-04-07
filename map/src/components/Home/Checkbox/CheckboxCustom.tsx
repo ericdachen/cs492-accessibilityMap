@@ -22,7 +22,6 @@ export default function CheckboxCustom(props: any) {
   } else {
     return (
       <FormControlLabel
-        disabled={true}
         control={<Checkbox defaultChecked />}
         label={<Typography variant="body2">{props.label}</Typography>}
       />
