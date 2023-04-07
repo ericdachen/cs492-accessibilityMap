@@ -13,14 +13,19 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523,
+  lat: 43.4643,
+  lng: -80.5204,
+};
+
+const mcDonalds = {
+  lat: 43.4830685733885,
+  lng: -80.52551182282787,
 };
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY!,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
   });
 
   //Save map in ref if to access the map later
@@ -54,10 +59,18 @@ function Map() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={15}
         onLoad={onLoad}
         onUnmount={onUnmount}
-      ></GoogleMap>
+      >
+        <Marker
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 7,
+          }}
+          position={mcDonalds}
+        />
+      </GoogleMap>
     </Box>
   );
 }

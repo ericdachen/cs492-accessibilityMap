@@ -1,13 +1,22 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import {
+  Grid,
+  Typography,
+  Stack,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Box,
+  TextField,
+} from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,7 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -55,19 +64,46 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const [value, setValue] = useState("");
+
+  function clickSearch() {
+    console.log(value);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="absolute" color="default">
         <Toolbar>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Restaurants Near Me"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Stack>
+            <Stack direction="row">
+              <TextField
+                id="outlined-basic"
+                label="Search"
+                variant="outlined"
+                onChange={(e) => setValue(e.target.value)}
+                sx={{
+                  width: "35vw",
+                }}
+              />
+              <Box
+                sx={{
+                  backgroundColor: "#000000",
+                  color: "#FFFFFF",
+                  minHeight: "6.5vh",
+                  px: "0.5vw",
+                  aspectRatio: "1/1",
+                  borderRadius: "0px 10px 10px 0px",
+                  verticalAlign: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+                onClick={clickSearch}
+              >
+                <SearchIcon fontSize="large" />
+              </Box>
+            </Stack>
+          </Stack>
         </Toolbar>
       </AppBar>
     </Box>
