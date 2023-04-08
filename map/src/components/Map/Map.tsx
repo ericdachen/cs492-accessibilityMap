@@ -62,6 +62,9 @@ function Map() {
         zoom={15}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        options={{
+          mapId: "4f514f1f3a43490",
+        }}
       >
         <Marker
           icon={{
