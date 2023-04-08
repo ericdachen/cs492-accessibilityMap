@@ -10,7 +10,7 @@ import {
   Box,
 } from "@mui/material";
 
-export default function CheckboxCustom(props: any) {
+export default function CheckboxCustom6(props: any) {
   if (props.size === "small") {
     return (
       <FormControlLabel
@@ -24,7 +24,7 @@ export default function CheckboxCustom(props: any) {
       <FormControlLabel
       control={
         <Checkbox
-          sx={{ "& .MuiSvgIcon-root": { fontSize: "2rem", color: "blue" } }}
+          sx={{ "& .MuiSvgIcon-root": { fontSize: "2rem", color: "brown" } }}
         />
       }
       label={<Typography variant="body2">{props.label}</Typography>}
@@ -32,4 +32,3 @@ export default function CheckboxCustom(props: any) {
     );
   }
 }
-
