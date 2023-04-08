@@ -11,6 +11,11 @@ import {
   TextField,
 } from "@mui/material";
 import CheckboxCustom from "./Checkbox/CheckboxCustom";
+import CheckboxCustom2 from "./Checkbox/CheckboxCustom2";
+import CheckboxCustom3 from "./Checkbox/CheckboxCustom3";
+import CheckboxCustom4 from "./Checkbox/CheckboxCustom4";
+import CheckboxCustom5 from "./Checkbox/CheckboxCustom5";
+import CheckboxCustom6 from "./Checkbox/CheckboxCustom6";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -19,6 +24,12 @@ import {
 } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { Height } from "@mui/icons-material";
+
+import '../../../../map/src/App.css'
+import '../../../../map/src/index.css'
+
+import '../../App.css'
+import '../../index.css'
 
 export default function Home() {
   return (
@@ -50,14 +61,15 @@ export default function Home() {
             </Typography>
             <Stack direction="row" spacing={2}>
               <Stack>
-                <CheckboxCustom label="Wheelchair Accessible" />
-                <CheckboxCustom label="Sign Language" />
-                <CheckboxCustom label="Service Pet Friendly" />
+                <CheckboxCustom label="Wheelchair Accessible"/>
+                <CheckboxCustom2 label="Sign Language" />
+                <CheckboxCustom3 label="Service Pet Friendly" />
+                
               </Stack>
               <Stack>
-                <CheckboxCustom label="Multilingual Staff" />
-                <CheckboxCustom label="Braille Menus Printed" />
-                <CheckboxCustom label="Food-Cutting Services" />
+                <CheckboxCustom4 label="Multilingual Staff" />
+                <CheckboxCustom5 label="Braille Menus Printed" />
+                <CheckboxCustom6 label="Food-Cutting Services" />
               </Stack>
             </Stack>
             <Stack direction="row">
