@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import {
   GoogleMap,
-  Marker,
+  MarkerF,
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
@@ -17,12 +17,35 @@ const center = {
   lng: -80.5204,
 };
 
-const mcDonalds = {
-  lat: 43.4830685733885,
-  lng: -80.52551182282787,
+const kk = {
+  lat: 43.47571816495286,
+  lng: -80.5180526156766,
 };
 
-function Map() {
+const kkString =
+  '<div id="content">' +
+  '<div id="siteNotice">' +
+  "</div>" +
+  '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+  '<div id="bodyContent">' +
+  "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+  "sandstone rock formation in the southern part of the " +
+  "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+  "south west of the nearest large town, Alice Springs; 450&#160;km " +
+  "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+  "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+  "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+  "Aboriginal people of the area. It has many springs, waterholes, " +
+  "rock caves and ancient paintings. Uluru is listed as a World " +
+  "Heritage Site.</p>" +
+  '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+  "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+  "(last visited June 22, 2009).</p>" +
+  "</div>" +
+  "</div>";
+
+function Map(props: any) {
+  const icon = "restaurant.png";
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
@@ -66,12 +89,13 @@ function Map() {
           mapId: "4f514f1f3a43490",
         }}
       >
-        <Marker
+        <MarkerF
+          animation={google.maps.Animation.DROP}
           icon={{
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 7,
+            url: "restaurantred.png",
+            scale: 2,
           }}
-          position={mcDonalds}
+          position={kk}
         />
       </GoogleMap>
     </Box>
