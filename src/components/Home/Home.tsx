@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { IPinSearchCriteria, ITrait } from "../../types/pin";
+import { getPinsByCriteria,IGetPinRequest } from "../../services/pins";
 
 export default function Home() {
   const [wheelchair, setWheelchair] = useState(false);
@@ -22,6 +24,46 @@ export default function Home() {
   const [pet, setPet] = useState(false);
   const [foodcut, setFoodcut] = useState(false);
   const [data, setData] = useState([false, false, false, false, false, false]);
+
+  const [name, setName] = useState("");
+
+  const handleSubmitButton = () => {
+    const traits:ITrait[] = []
+
+    if (wheelchair){
+      traits.push(ITrait.WheelchairAccessible)
+    }
+    if (multilingual){
+      traits.push(ITrait.MultilingualStaff)
+    }
+    if (sign){
+      traits.push(ITrait.SignLanguage)
+    }
+    if (braille){
+      traits.push(ITrait.BrailleMenu)
+    }
+    if (pet){
+      traits.push(ITrait.ServicePetFriendly)
+    }
+    if (foodcut){
+      traits.push(ITrait.CuttingServices)
+    }
+
+    const pinSearchCriteria: IPinSearchCriteria = {
+      name: name,
+      traits: traits
+    }
+    console.log(pinSearchCriteria)
+
+    const getPinRequest:IGetPinRequest={
+      searchCriteria: pinSearchCriteria
+    }
+
+    getPinsByCriteria(getPinRequest).then((response) => {console.log(response)}).catch((error) => {console.log(error)})
+
+  }
+
+
   return (
     <div
       style={{
@@ -296,20 +338,14 @@ export default function Home() {
                 sx={{
                   height: "6.5vh",
                 }}
+                onChange = {(e) => { setName(e.target.value)  }}
               />
-              <Link
-                to={{
-                  pathname: "/explore",
-                }}
-                state={{
-                  data: data,
-                }}
-              >
+              
                 <IconButton
                   type="submit"
                   aria-label="search"
                   onClick={() => {
-                    console.log(wheelchair);
+                    handleSubmitButton()
                   }}
                   sx={{
                     paddingBottom: "2vh",
@@ -317,7 +353,7 @@ export default function Home() {
                 >
                   <SearchIcon fontSize="large" />
                 </IconButton>
-              </Link>
+             
             </Stack>
           </Stack>
         </Grid>

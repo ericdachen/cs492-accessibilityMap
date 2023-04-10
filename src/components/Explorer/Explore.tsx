@@ -24,9 +24,14 @@ import RestaurantCard from "./Restaurant/RestaurantCard";
 import SearchAppBar from "./NavBar/NavBar";
 import Map from "../Map/Map";
 import AccessibleIcon from "@mui/icons-material/Accessible";
+
+interface IProps {}
+
 export default function Explore() {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
+  
+
   return (
     <ThemeProvider theme={theme}>
       <Stack spacing={3}>
