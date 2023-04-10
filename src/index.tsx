@@ -13,6 +13,7 @@ import {
   Link,
   BrowserRouter,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const router = createBrowserRouter([
   {
@@ -28,9 +29,20 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: Infinity, // Set cache time to never expire
+    },
+  },
+})
+
 root.render(
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
