@@ -26,11 +26,12 @@ func main() {
 
 	fmt.Println("Server is running on port 8080")
 
-	engine.GET("/pins/:id", pincontroller.GetPin)
+	engine.GET("/pins/:id", pincontroller.GetPinById)
 	engine.POST("/pins", pincontroller.AddPin)
 	engine.GET("/pins/location", pincontroller.GetPinByLocation)
 	engine.DELETE("/pins/:id", pincontroller.DeletePin)
 	engine.PUT("/pins/:id", pincontroller.UpdatePin)
+	engine.GET("/pins", pincontroller.GetPins)
 
 	engine.Run()
 }
