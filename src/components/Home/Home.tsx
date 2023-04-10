@@ -6,21 +6,22 @@ import {
   Stack,
   FormGroup,
   FormControlLabel,
+  IconButton,
   Checkbox,
   Box,
   TextField,
 } from "@mui/material";
-import CheckboxCustom from "./Checkbox/CheckboxCustom";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import { Height } from "@mui/icons-material";
 
 export default function Home() {
+  const [wheelchair, setWheelchair] = useState(false);
+  const [multilingual, setMultilingual] = useState(false);
+  const [sign, setSign] = useState(false);
+  const [braille, setBraille] = useState(false);
+  const [pet, setPet] = useState(false);
+  const [foodcut, setFoodcut] = useState(false);
+  const [data, setData] = useState([false, false, false, false, false, false]);
   return (
     <div
       style={{
@@ -42,54 +43,280 @@ export default function Home() {
       >
         <Grid item xs={6}>
           <Stack spacing={4}>
-            <Typography variant="h2" component="h2" align="left">
+            <Typography
+              variant="h2"
+              component="h2"
+              align="left"
+              fontWeight="800"
+            >
               Visit restaurants that care about inclusion!
             </Typography>
-            <Typography variant="h5" align="left">
+            <Typography variant="h5" align="left" fontWeight="500">
               Preferences
             </Typography>
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={4}>
               <Stack>
-                <CheckboxCustom label="Wheelchair Accessible" />
-                <CheckboxCustom label="Sign Language" />
-                <CheckboxCustom label="Service Pet Friendly" />
+                <Box
+                  sx={{
+                    backgroundColor: "#FFEAD1",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#FF740F",
+                          "&.Mui-checked": {
+                            color: "#FF740F",
+                          },
+                        }}
+                        checked={wheelchair}
+                        onChange={() => {
+                          setWheelchair(!wheelchair);
+                          setData([
+                            !data[0],
+                            data[1],
+                            data[2],
+                            data[3],
+                            data[4],
+                            data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">
+                        Wheelchair Accessible
+                      </Typography>
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#FFD0DB",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#F13B3B",
+                          "&.Mui-checked": {
+                            color: "#F13B3B",
+                          },
+                        }}
+                        checked={sign}
+                        onChange={() => {
+                          setSign(!sign);
+                          setData([
+                            data[0],
+                            data[1],
+                            !data[2],
+                            data[3],
+                            data[4],
+                            data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">Sign Language</Typography>
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#E1D6FF",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#5011FB",
+                          "&.Mui-checked": {
+                            color: "#5011FB",
+                          },
+                        }}
+                        checked={pet}
+                        onChange={() => {
+                          setPet(!pet);
+                          setData([
+                            data[0],
+                            data[1],
+                            data[2],
+                            data[3],
+                            !data[4],
+                            data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">
+                        Service Pet Friendly
+                      </Typography>
+                    }
+                  />
+                </Box>
               </Stack>
               <Stack>
-                <CheckboxCustom label="Multilingual Staff" />
-                <CheckboxCustom label="Braille Menus Printed" />
-                <CheckboxCustom label="Food-Cutting Services" />
+                <Box
+                  sx={{
+                    backgroundColor: "#D8E1FF",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#3867FF",
+                          "&.Mui-checked": {
+                            color: "#3867FF",
+                          },
+                        }}
+                        checked={multilingual}
+                        onChange={() => {
+                          setMultilingual(!multilingual);
+                          setData([
+                            data[0],
+                            !data[1],
+                            data[2],
+                            data[3],
+                            data[4],
+                            data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">
+                        Multilingual Staff
+                      </Typography>
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#EDF9D4",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#91D10A",
+                          "&.Mui-checked": {
+                            color: "#91D10A",
+                          },
+                        }}
+                        checked={foodcut}
+                        onChange={() => {
+                          setFoodcut(!foodcut);
+                          setData([
+                            data[0],
+                            data[1],
+                            data[2],
+                            data[3],
+                            data[4],
+                            !data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">
+                        Food-cutting Services
+                      </Typography>
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#FFFDC9",
+                    borderRadius: "100px",
+                    px: "1.5vw",
+                    my: "1vh",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        sx={{
+                          color: "#FBF301",
+                          "&.Mui-checked": {
+                            color: "#FBF301",
+                          },
+                        }}
+                        checked={braille}
+                        onChange={() => {
+                          setBraille(!braille);
+                          setData([
+                            data[0],
+                            data[1],
+                            data[2],
+                            !data[3],
+                            data[4],
+                            data[5],
+                          ]);
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography variant="body2">
+                        Braille Menus Printed
+                      </Typography>
+                    }
+                  />
+                </Box>
               </Stack>
             </Stack>
             <Stack direction="row">
               <TextField
-                id="outlined-basic"
+                id="search-bar"
                 label="Search"
                 variant="outlined"
                 fullWidth
+                size="medium"
+                sx={{
+                  height: "6.5vh",
+                }}
               />
               <Link
-                to="explore"
-                style={{
-                  height: "inherit",
+                to={{
+                  pathname: "/explore",
+                }}
+                state={{
+                  data: data,
                 }}
               >
-                <Box
+                <IconButton
+                  type="submit"
+                  aria-label="search"
+                  onClick={() => {
+                    console.log(wheelchair);
+                  }}
                   sx={{
-                    backgroundColor: "#000000",
-                    color: "#FFFFFF",
-                    minHeight: "6.5vh",
-                    px: "0.5vw",
-                    aspectRatio: "1/1",
-                    borderRadius: "0px 10px 10px 0px",
-                    verticalAlign: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    justifyContent: "center",
-                    display: "flex",
+                    paddingBottom: "2vh",
                   }}
                 >
                   <SearchIcon fontSize="large" />
-                </Box>
+                </IconButton>
               </Link>
             </Stack>
           </Stack>
