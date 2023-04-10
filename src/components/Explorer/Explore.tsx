@@ -26,12 +26,15 @@ import Map from "../Map/Map";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import { useQuery } from "react-query";
 import { IPin } from "../../types/pin";
+import TranslateIcon from "@mui/icons-material/Translate";
+import PetsIcon from "@mui/icons-material/Pets";
 import {
   GoogleMap,
   MarkerF,
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
+import { Translate } from "@mui/icons-material";
 
 interface IProps {}
 
@@ -47,19 +50,6 @@ export default function Explore() {
     // is already in the cache, it won't be used unless the cache is empty.
     throw new Error("Pins data not found in cache");
   });
-  // const markerItems = pinsData?.map((num: any) => (
-  //   <MarkerF
-  //     animation={google.maps.Animation.DROP}
-  //     icon={{
-  //       url: "restaurantred.png",
-  //       scale: 2,
-  //     }}
-  //     position={{
-  //       lat: num.geocode.latitude,
-  //       lng: num.geocode.longitude,
-  //     }}
-  //   />
-  // ));
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,7 +69,7 @@ export default function Explore() {
         >
           <Grid item xs={5} spacing={1}>
             <Stack spacing={1}>
-              <Typography align="left" variant="h3">
+              <Typography align="left" variant="h3" fontWeight={800}>
                 {" "}
                 Restaurants Near Me
               </Typography>
@@ -87,6 +77,7 @@ export default function Explore() {
                 <Chip
                   style={{
                     width: "10vw",
+                    backgroundColor: "#FFEAD1",
                   }}
                   icon={<AccessibleIcon />}
                   label="Wheelchair Accessible"
@@ -94,20 +85,44 @@ export default function Explore() {
                 <Chip
                   style={{
                     width: "10vw",
+                    backgroundColor: "#FFD0DB",
                   }}
-                  icon={<AccessibleIcon />}
-                  label="Wheelchair Accessible"
+                  icon={<TranslateIcon />}
+                  label="Sign Language Available"
+                />
+                <Chip
+                  style={{
+                    width: "10vw",
+                    backgroundColor: "#D8E1FF",
+                  }}
+                  icon={<PetsIcon />}
+                  label="Service Pet Friendly"
                 />
               </Stack>
 
               <Box maxHeight="70vh" sx={{ overflow: "auto" }}>
                 <Stack spacing={4} padding={1}>
-                  <RestaurantCard />
-                  <RestaurantCard />
-                  <RestaurantCard />
-                  <RestaurantCard />
-                  <RestaurantCard />
-                  <RestaurantCard />
+                  <RestaurantCard
+                    rate="4.7"
+                    name="Korner Kitchen"
+                    photo="kk.jpeg"
+                    cuisine="English Cuisine"
+                  />
+                  <RestaurantCard
+                    rate="4.1"
+                    name="Lazeez Shawarma"
+                    photo="lazeez.jpeg"
+                    cuisine="Meditteranean Cuisine"
+                  />
+                  <RestaurantCard
+                    rate="4.2"
+                    name="Nuri Village"
+                    photo="nuri.jpg"
+                    cuisine="Korean Food"
+                  />
+                  <RestaurantCard photo="lazeez.jpeg" />
+                  <RestaurantCard photo="lazeez.jpeg" />
+                  <RestaurantCard photo="lazeez.jpeg" />
                 </Stack>
               </Box>
             </Stack>

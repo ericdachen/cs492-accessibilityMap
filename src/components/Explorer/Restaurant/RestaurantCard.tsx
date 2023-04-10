@@ -19,11 +19,16 @@ import {
   CardMedia,
   Button,
   Paper,
+  Chip,
 } from "@mui/material";
+import AccessibleIcon from "@mui/icons-material/Accessible";
+import { useQuery } from "react-query";
+import TranslateIcon from "@mui/icons-material/Translate";
+import PetsIcon from "@mui/icons-material/Pets";
 import StarIcon from "@mui/icons-material/Star";
 import CheckboxCustom from "../../Home/Checkbox/CheckboxCustom";
 
-export default function RestaurantCard() {
+export default function RestaurantCard(props: any) {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
   return (
@@ -34,29 +39,49 @@ export default function RestaurantCard() {
             <CardMedia
               component="img"
               sx={{ width: "40%", objectFit: "cover" }}
-              image="lazeez.jpeg"
-              title="green iguana"
+              image={props.photo}
+              title={props.name}
             />
             <CardContent>
-              <Stack spacing={0.5}>
+              <Stack spacing={0}>
                 <Typography
                   gutterBottom
                   variant="h4"
                   component="div"
                   align="left"
+                  fontWeight={800}
                 >
-                  Lazeez Shawarma
+                  {props.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" align="left">
-                  ⭐️ 4.8
+                <Typography variant="h6" color="text.secondary" align="left">
+                  ⭐️ {props.rate} - {props.cuisine}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" align="left">
-                  Mediterranean Cuisine
-                </Typography>
-                <Stack spacing={0}>
-                  <CheckboxCustom label="Wheelchair Accessible" size="small" />
-                  <CheckboxCustom label="Sign Language" size="small" />
-                  <CheckboxCustom label="Service Pet Friendly" size="small" />
+                <br></br>
+                <Stack spacing={1}>
+                  <Chip
+                    style={{
+                      width: "10vw",
+                      backgroundColor: "#FFEAD1",
+                    }}
+                    icon={<AccessibleIcon />}
+                    label="Wheelchair Accessible"
+                  />
+                  <Chip
+                    style={{
+                      width: "10vw",
+                      backgroundColor: "#FFD0DB",
+                    }}
+                    icon={<TranslateIcon />}
+                    label="Sign Language Available"
+                  />
+                  <Chip
+                    style={{
+                      width: "10vw",
+                      backgroundColor: "#D8E1FF",
+                    }}
+                    icon={<PetsIcon />}
+                    label="Service Pet Friendly"
+                  />
                 </Stack>
               </Stack>
             </CardContent>
