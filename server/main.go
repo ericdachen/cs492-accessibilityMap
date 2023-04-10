@@ -31,7 +31,7 @@ func main() {
 	engine.GET("/pins/location", pincontroller.GetPinByLocation)
 	engine.DELETE("/pins/:id", pincontroller.DeletePin)
 	engine.PUT("/pins/:id", pincontroller.UpdatePin)
-	engine.GET("/pins", pincontroller.GetPins)
+	engine.POST("/pins/filter", pincontroller.GetPins)
 
 	engine.Run()
 }
