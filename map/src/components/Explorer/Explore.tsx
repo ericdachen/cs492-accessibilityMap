@@ -26,22 +26,40 @@ import Map from "../Map/Map";
 import AccessibleIcon from "@mui/icons-material/Accessible";
 import { useQuery } from "react-query";
 import { IPin } from "../../types/pin";
+import {
+  GoogleMap,
+  MarkerF,
+  InfoWindow,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 
 interface IProps {}
 
 export default function Explore() {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
-
-  const { data: pinsData, isLoading, isError } = useQuery<IPin[]>("pins", () => {
+  const {
+    data: pinsData,
+    isLoading,
+    isError,
+  } = useQuery<IPin[]>("pins", () => {
     // You can provide a default fetch function here, but since the pins data
     // is already in the cache, it won't be used unless the cache is empty.
     throw new Error("Pins data not found in cache");
   });
-
-  console.log(pinsData)
-  
-  
+  // const markerItems = pinsData?.map((num: any) => (
+  //   <MarkerF
+  //     animation={google.maps.Animation.DROP}
+  //     icon={{
+  //       url: "restaurantred.png",
+  //       scale: 2,
+  //     }}
+  //     position={{
+  //       lat: num.geocode.latitude,
+  //       lng: num.geocode.longitude,
+  //     }}
+  //   />
+  // ));
 
   return (
     <ThemeProvider theme={theme}>
@@ -95,7 +113,7 @@ export default function Explore() {
             </Stack>
           </Grid>
           <Grid item xs={7}>
-            <Map />
+            <Map pinsData={""} />
           </Grid>
         </Grid>
       </Stack>
