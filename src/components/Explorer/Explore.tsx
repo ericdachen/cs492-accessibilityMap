@@ -39,7 +39,7 @@ export default function Explore() {
     throw new Error("Pins data not found in cache");
   });
 
-
+  console.log(pinsData)
   
   
 

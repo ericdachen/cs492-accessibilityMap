@@ -31,6 +31,7 @@ export default function Home() {
   const queryClient = useQueryClient()
   const mutation = useMutation(getPinsByCriteria, {
     onSuccess: (data) => {
+      queryClient.invalidateQueries("pins");
       queryClient.setQueryData("pins", data);
       navigate("/explore")
     },
@@ -68,15 +69,8 @@ export default function Home() {
       searchCriteria: pinSearchCriteria
     }
 
-    mutation.mutate(getPinRequest, {
-      onSuccess: (response) => {
-        
-        console.log(response);
-      },
-      onError: (error) => {
-        console.log(error);
-      },
-    });
+    mutation.mutate(getPinRequest);
+
 
   }
 
