@@ -11,11 +11,12 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { IPinSearchCriteria, ITrait } from "../../types/pin";
-import { getPinsByCriteria,IGetPinRequest } from "../../services/pins";
+import { getPinsByCriteria, IGetPinRequest } from "../../services/pins";
 import { useMutation, useQueryClient } from "react-query";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [wheelchair, setWheelchair] = useState(false);
@@ -28,52 +29,49 @@ export default function Home() {
 
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const mutation = useMutation(getPinsByCriteria, {
     onSuccess: (data) => {
       queryClient.invalidateQueries("pins");
       queryClient.setQueryData("pins", data);
-      navigate("/explore")
+      navigate("/explore");
     },
   });
 
   const handleSubmitButton = () => {
-    const traits:ITrait[] = []
+    const traits: ITrait[] = [];
 
-    if (wheelchair){
-      traits.push(ITrait.WheelchairAccessible)
+    if (wheelchair) {
+      traits.push(ITrait.WheelchairAccessible);
     }
-    if (multilingual){
-      traits.push(ITrait.MultilingualStaff)
+    if (multilingual) {
+      traits.push(ITrait.MultilingualStaff);
     }
-    if (sign){
-      traits.push(ITrait.SignLanguage)
+    if (sign) {
+      traits.push(ITrait.SignLanguage);
     }
-    if (braille){
-      traits.push(ITrait.BrailleMenu)
+    if (braille) {
+      traits.push(ITrait.BrailleMenu);
     }
-    if (pet){
-      traits.push(ITrait.ServicePetFriendly)
+    if (pet) {
+      traits.push(ITrait.ServicePetFriendly);
     }
-    if (foodcut){
-      traits.push(ITrait.CuttingServices)
+    if (foodcut) {
+      traits.push(ITrait.CuttingServices);
     }
 
     const pinSearchCriteria: IPinSearchCriteria = {
       name: name,
-      traits: traits
-    }
-    console.log(pinSearchCriteria)
+      traits: traits,
+    };
+    console.log(pinSearchCriteria);
 
-    const getPinRequest:IGetPinRequest={
-      searchCriteria: pinSearchCriteria
-    }
+    const getPinRequest: IGetPinRequest = {
+      searchCriteria: pinSearchCriteria,
+    };
 
     mutation.mutate(getPinRequest);
-
-
-  }
-
+  };
 
   return (
     <div
@@ -349,22 +347,24 @@ export default function Home() {
                 sx={{
                   height: "6.5vh",
                 }}
-                onChange = {(e) => { setName(e.target.value)  }}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               />
-              
+              <Link to="explore">
                 <IconButton
                   type="submit"
                   aria-label="search"
-                  onClick={() => {
-                    handleSubmitButton()
-                  }}
+                  // onClick={() => {
+                  //   handleSubmitButton()
+                  // }}
                   sx={{
                     paddingBottom: "2vh",
                   }}
                 >
                   <SearchIcon fontSize="large" />
                 </IconButton>
-             
+              </Link>
             </Stack>
           </Stack>
         </Grid>
