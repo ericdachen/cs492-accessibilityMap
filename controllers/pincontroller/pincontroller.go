@@ -8,15 +8,41 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type IGetPinsRequest struct {
+	SearchCriteria types.IPinSearchCriteria `json:"searchCriteria"`
+}
+
+type IGetPinsResponse struct {
+	Pins []types.IPin `json:"pins"`
+}
+
+func GetPins(context *gin.Context) {
+	var request IGetPinsRequest
+	err := context.BindJSON(&request)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	pins, err := pinservice.GetPinsByCriteria(request.SearchCriteria)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	response := IGetPinsResponse{pins}
+	context.JSON(http.StatusOK, response)
+}
+
 type IGetPinResponse struct {
 	Pin types.IPin `json:"pin"`
 }
 
-func GetPin(context *gin.Context) {
+func GetPinById(context *gin.Context) {
 
 	var pinId = context.Param("id")
 
-	pin, err := pinservice.GetPin(pinId)
+	pin, err := pinservice.GetPinById(pinId)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

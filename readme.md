@@ -10,12 +10,29 @@
 }
 ```
 
+### ITrait
+```json
+enum Trait {
+  "wheelchairAccessible",
+  "multilingualStaff",
+  "signLanguage",
+  "brailleMenu",
+  "servicePetFriendly",
+  "cuttingServices"
+}
+```
+
 ### IPin
 
 ```json
 {
-  "Id": string,
-  "Location": ILocation,
+  "id": string,
+  "geocode": ILocation,
+  "name": string,
+  "description": string,
+  "starRating": number,
+  "traits": ITrait[],
+  
 }
 ```
 
@@ -24,7 +41,7 @@
 
 ## Endpoints
 
-### GetPin
+### GetPinById
 
 - **URL**: `/pins/:id`
 - **Method**: `GET`
@@ -44,6 +61,32 @@ GET /pins/123
   }
 }
 ```
+
+### GetPinByCriteria
+- **URL**: `/pins`
+- **Method**: `GET`
+- **Data Parameters**: `{ "pin": { // IPin object properties } }`
+
+#### Sample Request
+```json
+GET /pins
+{
+  "searchCriteria": {
+    // IPin object properties (do not pass id)
+  }
+}
+```
+
+#### Sample Response
+```json
+{
+  "pins": [
+    // IPin object properties
+  ]
+}
+```
+
+
 ### AddPin
 - **URL**: `/pins`
 - **Method**: `POST`
@@ -80,7 +123,7 @@ POST /pins
 PUT /pins/123
 {
   "pin": {
-    // IPin object properties
+    // IPin object properties  (do not pass id)
   }
 }
 ```

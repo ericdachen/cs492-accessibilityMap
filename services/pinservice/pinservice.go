@@ -11,7 +11,48 @@ import (
 	"time"
 )
 
-func GetPin(pinId string) (*types.IPin, error) {
+func GetPinsByCriteria(searchCriteria types.IPinSearchCriteria) ([]types.IPin, error) {
+	var pinCollection = db.MongoClient.Database("local").Collection("pins")
+
+	filter := bson.M{}
+
+	if searchCriteria.Name != "" {
+		filter["name"] = searchCriteria.Name
+	}
+
+	if searchCriteria.StarRating != 0 {
+		filter["starRating"] = searchCriteria.StarRating
+	}
+
+	if len(searchCriteria.Traits) > 0 {
+		filter["traits"] = bson.M{"$all": searchCriteria.Traits}
+	}
+
+	context, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	cursor, err := pinCollection.Find(context, filter, options.Find())
+	if err != nil {
+		log.Printf("Error retrieving pins: %v\n", err)
+		return nil, err
+	}
+	defer cursor.Close(context)
+
+	var pins []types.IPin = make([]types.IPin, 0)
+	for cursor.Next(context) {
+		var pin types.IPin
+		err := cursor.Decode(&pin)
+		if err != nil {
+			log.Printf("Error decoding pin: %v\n", err)
+			return nil, err
+		}
+		pins = append(pins, pin)
+	}
+
+	return pins, nil
+}
+
+func GetPinById(pinId string) (*types.IPin, error) {
 	var pinCollection = db.MongoClient.Database("local").Collection("pins")
 
 	// create an ObjectID from the ID string
@@ -119,6 +160,9 @@ func UpdatePin(pinId string, newPin types.IPin) (*types.IPin, error) {
 				"latitude":  newPin.GeoCode.Latitude,
 				"longitude": newPin.GeoCode.Longitude,
 			},
+			"name":       newPin.Name,
+			"starRating": newPin.StarRating,
+			"traits":     newPin.Traits,
 		},
 	}
 
