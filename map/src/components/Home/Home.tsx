@@ -11,10 +11,11 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import { IPinSearchCriteria, ITrait } from "../../types/pin";
 import { getPinsByCriteria,IGetPinRequest } from "../../services/pins";
+import { useMutation, useQueryClient } from "react-query";
 
 export default function Home() {
   const [wheelchair, setWheelchair] = useState(false);
@@ -26,6 +27,14 @@ export default function Home() {
   const [data, setData] = useState([false, false, false, false, false, false]);
 
   const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const queryClient = useQueryClient()
+  const mutation = useMutation(getPinsByCriteria, {
+    onSuccess: (data) => {
+      queryClient.setQueryData("pins", data);
+      navigate("/explore")
+    },
+  });
 
   const handleSubmitButton = () => {
     const traits:ITrait[] = []
@@ -59,7 +68,15 @@ export default function Home() {
       searchCriteria: pinSearchCriteria
     }
 
-    getPinsByCriteria(getPinRequest).then((response) => {console.log(response)}).catch((error) => {console.log(error)})
+    mutation.mutate(getPinRequest, {
+      onSuccess: (response) => {
+        
+        console.log(response);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
 
   }
 

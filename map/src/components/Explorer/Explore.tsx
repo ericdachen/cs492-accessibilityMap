@@ -24,12 +24,23 @@ import RestaurantCard from "./Restaurant/RestaurantCard";
 import SearchAppBar from "./NavBar/NavBar";
 import Map from "../Map/Map";
 import AccessibleIcon from "@mui/icons-material/Accessible";
+import { useQuery } from "react-query";
+import { IPin } from "../../types/pin";
 
 interface IProps {}
 
 export default function Explore() {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
+
+  const { data: pinsData, isLoading, isError } = useQuery<IPin[]>("pins", () => {
+    // You can provide a default fetch function here, but since the pins data
+    // is already in the cache, it won't be used unless the cache is empty.
+    throw new Error("Pins data not found in cache");
+  });
+
+
+  
   
 
   return (
