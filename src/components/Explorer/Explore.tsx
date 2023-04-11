@@ -120,9 +120,6 @@ export default function Explore() {
                     photo="nuri.jpg"
                     cuisine="Korean Food"
                   />
-                  <RestaurantCard photo="lazeez.jpeg" />
-                  <RestaurantCard photo="lazeez.jpeg" />
-                  <RestaurantCard photo="lazeez.jpeg" />
                 </Stack>
               </Box>
             </Stack>
